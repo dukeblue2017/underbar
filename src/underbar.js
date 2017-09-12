@@ -99,7 +99,6 @@
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
     var passers = _.filter(collection, test);
-    console.log(passers.values)
     var answer = _.filter(collection, function notInPassers(item) {
       for (var i = 0; i < passers.length; i++) {
         if (passers[i] === item) {
@@ -111,7 +110,12 @@
   };
 
   // Produce a duplicate-free version of the array.
+  // there seems to be something wrong here, I filled in the FILL_ME_IN
+  // in spec/part1.js but there's still something wrong
   _.uniq = function(array, isSorted, iterator) {
+    console.log(array,isSorted,iterator)
+    var set = new Set(array);
+    return [...set]
   };
 
 
@@ -120,6 +124,11 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+    var answer = [];
+    _.each(collection, function(item) {
+      answer.push(iterator(item))
+    });
+    return answer;
   };
 
   /*
