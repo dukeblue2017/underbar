@@ -98,6 +98,16 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+    var passers = _.filter(collection, test);
+    console.log(passers.values)
+    var answer = _.filter(collection, function notInPassers(item) {
+      for (var i = 0; i < passers.length; i++) {
+        if (passers[i] === item) {
+          return false
+        }
+      } return true;
+    });
+    return answer;
   };
 
   // Produce a duplicate-free version of the array.
