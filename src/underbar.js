@@ -113,7 +113,6 @@
   // there seems to be something wrong here, I filled in the FILL_ME_IN
   // in spec/part1.js but there's still something wrong
   _.uniq = function(array, isSorted, iterator) {
-    console.log(array,isSorted,iterator)
     var set = new Set(array);
     return [...set]
   };
@@ -170,6 +169,14 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+  	_.each(collection, function(item) {
+  	  if (accumulator === undefined && item === collection[0]) {
+  	  	accumulator = collection[0];
+  	  } else {
+        accumulator = (iterator(accumulator, item));
+  	  }
+  	})
+  	return accumulator;
   };
 
   // Determine if the array or object contains a given value (using `===`).
