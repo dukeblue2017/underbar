@@ -110,11 +110,22 @@
   };
 
   // Produce a duplicate-free version of the array.
-  // there seems to be something wrong here, I filled in the FILL_ME_IN
-  // in spec/part1.js but there's still something wrong
+
   _.uniq = function(array, isSorted, iterator) {
-    var set = new Set(array);
-    return [...set]
+    var answer = [];
+    var iterateds = []
+    for (var i = 0; i < array.length; i++) {
+    	if (iterator !== undefined && isSorted) {
+    	  if (!(iterateds.includes(iterator(array[i])))) {
+    	    answer.push(array[i])
+    	    iterateds.push(iterator(array[i]))
+    	  }
+    	} else {
+    		if (!(answer.includes(array[i]))) {
+    		  answer.push(array[i]);
+    		}
+    	}
+    } return answer;
   };
 
 
