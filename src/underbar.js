@@ -227,13 +227,16 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    function isTrue(item) {
+      return (item == true || typeof item === 'string')
+    }
     for (var i = 0; i < collection.length; i++) {
       if (iterator === undefined) {
-        if (collection[i] == true) {
+        if (isTrue(collection[i])) {
           return true;
         }
       } else {
-        if (iterator(collection[i]) == true) {
+        if (isTrue(iterator(collection[i]))) {
         return true;
         }
       }
@@ -354,7 +357,6 @@
     for (var i = 2; i < arguments.length; i++) {
       args.push(arguments[i])
     }
-    console.log(args)
     setTimeout(function() {
       return func(args[0],args[1],args[2],args[3],args[4],args[5]);
     }, wait);
