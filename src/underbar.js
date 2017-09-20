@@ -354,8 +354,9 @@
     for (var i = 2; i < arguments.length; i++) {
       args.push(arguments[i])
     }
+    console.log(args)
     setTimeout(function() {
-      return func();
+      return func(args[0],args[1],args[2],args[3],args[4],args[5]);
     }, wait);
   };
 
