@@ -274,7 +274,6 @@
     for (var i = 0; i < arguments.length; i++) {
       var src = arguments[i];
       for (var item in src) {
-        console.log(obj)
         if (item in obj) {
 
         } else {
@@ -325,6 +324,26 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var result;
+    var runs = {};
+    var args = [];
+    return function() {
+      for (var i = 0; i < arguments.length; i++) {
+        if (!(arguments[i] in args)) {
+          args.push(arguments[i])
+        }
+      }
+      console.log(args)
+      var a = args in runs;
+      var b = (args[0] in runs && (!(Array.isArray(args[0]))));
+      var c = (typeof args === 'object')
+      if ( a || b || (a && c)) {
+        result = runs[args];
+      } else {
+        result = func.apply(this, arguments);
+        runs[args] = result;
+      } return result;
+    }
   };
 
   // Delays a function for the given number of milliseconds, and then calls
