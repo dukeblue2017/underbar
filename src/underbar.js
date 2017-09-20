@@ -329,11 +329,8 @@
     var args = [];
     return function() {
       for (var i = 0; i < arguments.length; i++) {
-        if (!(arguments[i] in args)) {
-          args.push(arguments[i])
-        }
+        args.push(arguments[i])
       }
-      console.log(args)
       var a = args in runs;
       var b = (args[0] in runs && (!(Array.isArray(args[0]))));
       var c = (typeof args === 'object')
